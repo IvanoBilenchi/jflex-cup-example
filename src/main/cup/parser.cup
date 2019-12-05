@@ -1,0 +1,22 @@
+/* Adapted from: http://www2.cs.tum.edu/projects/cup/examples.php */
+
+package example;
+class Parser;
+
+terminal PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
+terminal Integer NUMBER;
+
+non terminal Integer expr;
+
+precedence left PLUS, MINUS;
+precedence left TIMES;
+precedence left UMINUS;
+
+expr ::=
+    expr:e1 PLUS expr:e2    {: RESULT = e1 + e2; :} |
+    expr:e1 MINUS expr:e2   {: RESULT = e1 - e2; :} |
+    expr:e1 TIMES expr:e2   {: RESULT = e1 * e2; :} |
+    MINUS expr:e            {: RESULT = -e; :} %prec UMINUS |
+    LPAREN expr:e RPAREN    {: RESULT = e; :} |
+    NUMBER:n                {: RESULT = n; :}
+;
