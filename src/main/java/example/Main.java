@@ -1,19 +1,16 @@
 package example;
 
-import java_cup.runtime.DefaultSymbolFactory;
-import java_cup.runtime.SymbolFactory;
+import java_cup.runtime.ComplexSymbolFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import example.Lexer;
-import example.Parser;
-
 class Main {
 
     private static Object parseExpression(String expression) throws Exception {
-        SymbolFactory symbolFactory = new DefaultSymbolFactory();
-        Parser parser = new Parser(new Lexer(expression, symbolFactory), symbolFactory);
+        ComplexSymbolFactory factory = new ComplexSymbolFactory();
+        example.Lexer lexer = new example.Lexer(expression, factory);
+        example.Parser parser = new example.Parser(lexer, factory);
         return parser.parse().value;
     }
 
@@ -23,7 +20,7 @@ class Main {
             try {
                 System.out.printf("= %s\n", parseExpression(reader.readLine()));
             } catch (Exception e) {
-                System.err.println(e.toString());
+                e.printStackTrace();
             }
         }
     }

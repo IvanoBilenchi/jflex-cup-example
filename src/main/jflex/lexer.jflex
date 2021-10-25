@@ -1,5 +1,4 @@
 package example;
-import java_cup.runtime.Symbol;
 import java_cup.runtime.SymbolFactory;
 import java.io.StringReader;
 
@@ -19,6 +18,10 @@ import java.io.StringReader;
         this.sf = sf;
     }
 %}
+
+%eofval{
+    return sf.newSymbol("EOF", ParserSym.EOF);
+%eofval}
 
 Number = [0-9]+
 
