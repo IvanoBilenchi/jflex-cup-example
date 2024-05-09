@@ -32,5 +32,5 @@ Number = [0-9]+
 "*"         { return sf.newSymbol("*", ParserSym.TIMES); }
 "("         { return sf.newSymbol("(", ParserSym.LPAREN); }
 ")"         { return sf.newSymbol(")", ParserSym.RPAREN); }
-{Number}    { return sf.newSymbol("NUMBER", ParserSym.NUMBER, new Integer(yytext())); }
+{Number}    { return sf.newSymbol("NUMBER", ParserSym.NUMBER, Integer.valueOf(yytext())); }
 .           { /* ignore */ }
